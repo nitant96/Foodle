@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.example.nitantsood.buyer_serverapplication.foodDetailActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/foodDetailImage"
+            android:layout_height="300dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/foodDetailRouteButton"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/foodDetailTitle"
+        android:text="TITLE COMES HERE"
+        android:textSize="40dp"
+        android:textAlignment="center"
+        android:layout_margin="16dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="ORGANISATION"
+                android:textSize="30dp"
+                android:id="@+id/foodDetailOrganisation"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:text="REVIEWS"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:layout_marginLeft="8dp"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="lipsum\tsadsfff\ndsd\nsdd\n"
+        android:id="@+id/foodDetailAddress"
+        android:textStyle="italic"
+        android:textSize="20dp"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EXPIRY :2 months"
+        android:id="@+id/foodDetailExpiry"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_margin="8dp"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/foodDetailQuantity"
+                android:text="QUANTITY :"
+                android:textSize="15dp"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="COST :"
+                android:id="@+id/foodDetailCost"
+                android:textSize="15dp"
+                android:layout_margin="8dp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ORDER NOW"
+        android:id="@+id/foodDetailOrder"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_margin="16dp"
+        android:layout_gravity="center"
+        />
+
+</LinearLayout>
+
+</ScrollView>
+

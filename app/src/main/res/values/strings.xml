@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Anndaata</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_seller_foodinput_details">SellerFoodinputDetails</string>
+    <string name="title_activity_one_map">Map</string>
+    <string name="title_activity_all_map">Map</string>
+    <string name="title_activity_pool_location_set_finder">Map</string>
+</resources>

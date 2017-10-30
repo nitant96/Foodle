@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    android:background="#E0F2F1"
+android:orientation="horizontal"
+tools:context="com.example.nitantsood.buyer_serverapplication.PoolContributorActivity">
+
+<TextView
+    android:id="@+id/pool_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Pool Name"
+    android:textAllCaps="true"
+    android:textStyle="bold"
+    android:textSize="30sp"
+    android:textAlignment="center"
+    />
+
+<LinearLayout
+    android:id="@+id/loc"
+    android:layout_below="@id/pool_name"
+    android:paddingTop="5dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+
+        android:layout_width="0dp"
+        android:id="@+id/pool_Location"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textStyle="italic"
+        android:textSize="20sp"
+        android:textAlignment="center"
+
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/lin1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/loc"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Your Name"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_toRightOf="@id/name"
+        android:layout_width="0dp"
+        android:id="@+id/contri_name"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:layout_weight="3"
+        android:textSize="20dp"/>
+
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/lin2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/lin1"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:id="@+id/contri_title"
+        android:layout_toRightOf="@id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Add Title"
+        android:layout_weight="3"
+        android:textSize="20dp"/>
+
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/lin3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/lin2"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:id="@+id/quantity"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Quantity"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_toRightOf="@id/quantity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/contri_qty"
+        android:hint="Specify Quantity"
+        android:layout_weight="3"
+        android:textSize="20dp"/>
+
+</LinearLayout>
+
+
+<Button
+    android:layout_margin="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Contribute"
+    android:textSize="20dp"
+    android:id="@+id/contri_button"
+    android:backgroundTint="@color/colorPrimaryDark"
+    android:layout_below="@id/lin3"
+    android:gravity="center_horizontal"
+    android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:title="Add New Item"
+        android:id="@+id/addNewSellerItem"/>
+    <item android:title="View Pool"
+        android:id="@+id/poolFromSellerButton"/>
+</menu>

@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "657896449343",
+    "firebase_url": "https://buyer-serverapplication.firebaseio.com",
+    "project_id": "buyer-serverapplication",
+    "storage_bucket": "buyer-serverapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657896449343:android:3e9b28f4ade8f64c",
+        "android_client_info": {
+          "package_name": "com.example.nitantsood.buyer_serverapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657896449343-4sjdlvig6iprn8hmur731thmi8les78b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nitantsood.buyer_serverapplication",
+            "certificate_hash": "e55c0f46cd8a5f4bbdc91e8e07bf7bddd03c3c4f"
+          }
+        },
+        {
+          "client_id": "657896449343-hv4o5v809deck734t3gdtebvnpc5qkhc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtA2LJKedwk0vDs_UkaT2tXInvgg_Yz5s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657896449343-hv4o5v809deck734t3gdtebvnpc5qkhc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657896449343:android:4b5dee7b2d423064",
+        "android_client_info": {
+          "package_name": "com.example.rachitsinghal.sellerside"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657896449343-im1v3khauvkmqpdvmqa7603c2hcd1nhg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rachitsinghal.sellerside",
+            "certificate_hash": "381181f40cf6a719c74f61ed6a3484edbfb8999f"
+          }
+        },
+        {
+          "client_id": "657896449343-hv4o5v809deck734t3gdtebvnpc5qkhc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtA2LJKedwk0vDs_UkaT2tXInvgg_Yz5s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657896449343-hv4o5v809deck734t3gdtebvnpc5qkhc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
