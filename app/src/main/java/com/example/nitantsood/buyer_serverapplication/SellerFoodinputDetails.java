@@ -48,7 +48,7 @@ import java.util.Date;
 
 import static com.example.nitantsood.buyer_serverapplication.FireApp.mAuth;
 
-public class SellerFoodinputDetails extends AppCompatActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+public class SellerFoodinputDetails extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     LocationManager locationManager;
     LocationListener locationListener;
@@ -56,21 +56,22 @@ public class SellerFoodinputDetails extends AppCompatActivity implements DatePic
     OneSellerDetail currentSellerLoggedIn;
 
     private DatabaseReference databaseReference;
-    private Uri imageUri=null;
-    private static final int GALLERY_REQUEST=1;
+    private Uri imageUri = null;
+    private static final int GALLERY_REQUEST = 1;
     private StorageReference imageStorage;
     private ProgressDialog progressDialog;
 
     ImageButton imageButton;
-    boolean firstTimeLocationPick=true;
+    boolean firstTimeLocationPick = true;
     String seller_uid;
     Switch priceSwitch;
     java.sql.Timestamp expiryTimestamp;
-    Calendar expiryCalendar=Calendar.getInstance();
+    Calendar expiryCalendar = Calendar.getInstance();
     private String food_uid;
-    EditText Title,Description,Quantity,Price,Expiry;
+    EditText Title, Description, Quantity, Price, Expiry;
     private Firebase mRef;
     ImageButton expiryPicker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,14 +79,14 @@ public class SellerFoodinputDetails extends AppCompatActivity implements DatePic
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        imageStorage= FirebaseStorage.getInstance().getReference();
+        imageStorage = FirebaseStorage.getInstance().getReference();
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                if(firstTimeLocationPick) {
-                    firstTimeLocationPick=false;
+                if (firstTimeLocationPick) {
+                    firstTimeLocationPick = false;
                     currentLatLang = new LatLng(location.getLatitude(), location.getLongitude());
                     storeItem();
                 }
@@ -107,34 +108,33 @@ public class SellerFoodinputDetails extends AppCompatActivity implements DatePic
             }
         };
 
-        Title=(EditText) findViewById(R.id.SellerFoodItemTitle);
-        Description=(EditText) findViewById(R.id.SellerFoodItemDescription);
-        Quantity=(EditText) findViewById(R.id.SellerFoodItemQuantity);
-        Price=(EditText)findViewById(R.id.SellerFoodItemPrice);
-        Expiry=(EditText)findViewById(R.id.SellerFoodItemExpiry);
-        expiryPicker=(ImageButton)findViewById(R.id.SellerFoodItemExpiryPicker);
-        priceSwitch=(Switch) findViewById(R.id.switch1);
-        imageButton=(ImageButton) findViewById(R.id.imageButton);
-        progressDialog=new ProgressDialog(this);
+        Title = (EditText) findViewById(R.id.SellerFoodItemTitle);
+        Description = (EditText) findViewById(R.id.SellerFoodItemDescription);
+        Quantity = (EditText) findViewById(R.id.SellerFoodItemQuantity);
+        Price = (EditText) findViewById(R.id.SellerFoodItemPrice);
+        Expiry = (EditText) findViewById(R.id.SellerFoodItemExpiry);
+        expiryPicker = (ImageButton) findViewById(R.id.SellerFoodItemExpiryPicker);
+        priceSwitch = (Switch) findViewById(R.id.switch1);
+        imageButton = (ImageButton) findViewById(R.id.imageButton);
+        progressDialog = new ProgressDialog(this);
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent galleryIntent=new Intent(Intent.ACTION_GET_CONTENT);
+                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent,GALLERY_REQUEST);
+                startActivityForResult(galleryIntent, GALLERY_REQUEST);
             }
         });
         priceSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!isChecked){
+                if (!isChecked) {
                     Price.setText("");
                     priceSwitch.setTextColor(Color.GREEN);
                     Price.setHint("Price");
                     Price.setEnabled(true);
-                }
-                else{
+                } else {
                     Price.setText("0");
                     priceSwitch.setTextColor(Color.RED);
                     Price.setEnabled(false);
@@ -144,49 +144,55 @@ public class SellerFoodinputDetails extends AppCompatActivity implements DatePic
         expiryPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar c=Calendar.getInstance();
-                int year=c.get(Calendar.YEAR);
-                int month=c.get(Calendar.MONTH);
-                int dom=c.get(Calendar.DAY_OF_MONTH);
+                Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int dom = c.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog=new DatePickerDialog(SellerFoodinputDetails.this,SellerFoodinputDetails.this,year,month,dom);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(SellerFoodinputDetails.this, SellerFoodinputDetails.this, year, month, dom);
                 datePickerDialog.show();
             }
         });
-        mRef=new Firebase("https://buyer-serverapplication.firebaseio.com/Food_Item");
-        Intent intent=getIntent();
-        Bundle bundle=intent.getExtras();
-        currentSellerLoggedIn=(OneSellerDetail) bundle.get("oneSeller");
-        seller_uid=currentSellerLoggedIn.getSeller_UID();
-        Toast.makeText(this,seller_uid, Toast.LENGTH_SHORT).show();
+        mRef = new Firebase("https://buyer-serverapplication.firebaseio.com/Food_Item");
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        currentSellerLoggedIn = (OneSellerDetail) bundle.get("oneSeller");
+        seller_uid = currentSellerLoggedIn.getSeller_UID();
+        Toast.makeText(this, seller_uid, Toast.LENGTH_SHORT).show();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date date=new Date();
-                java.sql.Timestamp currentTimestamp=new java.sql.Timestamp(date.getTime());
-                food_uid=currentTimestamp.getTime()+"";
-                if(checkExpiryDelay(expiryTimestamp,currentTimestamp) && !priceSwitch.isChecked()){
-                    Toast.makeText(SellerFoodinputDetails.this,"Expiry time is less than 2 hours, Please make your Food Free for All !!", Toast.LENGTH_SHORT).show();
-                }
-                else if(Title.getText().toString().equals("")){
-                    Toast.makeText(SellerFoodinputDetails.this,"Please enter a valid Title for Food", Toast.LENGTH_SHORT).show();
-                }
-                else if(Quantity.getText().toString().equals("")){
-                    Toast.makeText(SellerFoodinputDetails.this,"Please enter a valid Quantity for Food", Toast.LENGTH_SHORT).show();
-                }
-                else if(!currentTimestamp.before(expiryTimestamp)){
-                    Toast.makeText(SellerFoodinputDetails.this,"Please choose a valid Expiry Time", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    if(Build.VERSION.SDK_INT<23){
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                Date date = new Date();
+                java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(date.getTime());
+                food_uid = currentTimestamp.getTime() + "";
+                if (checkExpiryDelay(expiryTimestamp, currentTimestamp) && !priceSwitch.isChecked()) {
+                    Toast.makeText(SellerFoodinputDetails.this, "Expiry time is less than 2 hours, Please make your Food Free for All !!", Toast.LENGTH_SHORT).show();
+                } else if (Title.getText().toString().equals("")) {
+                    Toast.makeText(SellerFoodinputDetails.this, "Please enter a valid Title for Food", Toast.LENGTH_SHORT).show();
+                } else if (Quantity.getText().toString().equals("")) {
+                    Toast.makeText(SellerFoodinputDetails.this, "Please enter a valid Quantity for Food", Toast.LENGTH_SHORT).show();
+                } else if (!currentTimestamp.before(expiryTimestamp)) {
+                    Toast.makeText(SellerFoodinputDetails.this, "Please choose a valid Expiry Time", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (Build.VERSION.SDK_INT < 23) {
+                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            return;
+                        }
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
                     }else {
                         if (ContextCompat.checkSelfPermission(SellerFoodinputDetails.this, android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
                             ActivityCompat.requestPermissions(SellerFoodinputDetails.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},1);
                         }else {
-                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
                         }
                     }
                 }

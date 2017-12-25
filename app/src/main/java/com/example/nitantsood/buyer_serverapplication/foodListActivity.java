@@ -1,4 +1,3 @@
-
 package com.example.nitantsood.buyer_serverapplication;
 
 import android.app.ProgressDialog;
@@ -21,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -39,43 +39,61 @@ import java.util.Map;
 
 public class foodListActivity extends AppCompatActivity implements FoodListAdapter.onFoodItemClickListener, DirectionFinderListener {
     RecyclerView foodListView;
-    public static  ArrayList<OneFoodItem> list;
+    public static ArrayList<OneFoodItem> list;
     FoodListAdapter adapter;
     private Firebase mRef;
-    static int k=0;
-    private ProgressDialog progressDialog;
+    static int k = 0;
+    private ProgressBar progressBar;
 
     LocationManager locationManager;
     LocationListener locationListener;
     OneUserDetails oneUserDetails;
     public static LatLng currentLatLang;
 
-    boolean firstTimeLocationPick=true;
-//    DatabaseReference database;
+    boolean firstTimeLocationPick = true;
+
+    @Override
+    protected void onResume() {
+        adapter.notifyDataSetChanged();
+        super.onResume();
+    }
+
+    //    DatabaseReference database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
-        list=new ArrayList<>();
-        foodListView=(RecyclerView) findViewById(R.id.FoodList);
+        list = new ArrayList<>();
+        foodListView = (RecyclerView) findViewById(R.id.FoodList);
+        progressBar = findViewById(R.id.progressBar2);
 
-        Intent intent=getIntent();
-        Bundle bundle=intent.getExtras();
-        oneUserDetails=(OneUserDetails) bundle.get("oneUser");
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        progressBar.setVisibility(View.VISIBLE);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        oneUserDetails = (OneUserDetails) bundle.get("oneUser");
         foodListView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
         foodListView.addItemDecoration(new SimpledividerItemDecoration(this));
-        adapter=new FoodListAdapter(this,list,this);
+        adapter = new FoodListAdapter(this, list, this);
         foodListView.setAdapter(adapter);
 
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                if(firstTimeLocationPick) {
-                    firstTimeLocationPick=false;
+                if (firstTimeLocationPick) {
+                    firstTimeLocationPick = false;
                     currentLatLang = new LatLng(location.getLatitude(), location.getLongitude());
+                    progressBar.setVisibility(View.INVISIBLE);
                     callFirebase();
                 }
             }
@@ -95,14 +113,31 @@ public class foodListActivity extends AppCompatActivity implements FoodListAdapt
 
             }
         };
-        if(Build.VERSION.SDK_INT<23){
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+
+        locationFinderCall();
+    }
+
+    private void locationFinderCall() {
+
+        if (Build.VERSION.SDK_INT < 23) {
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
         }else {
             if (ContextCompat.checkSelfPermission(foodListActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
                 ActivityCompat.requestPermissions(foodListActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},1);
             }else {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
             }
         }
     }
@@ -176,7 +211,7 @@ public class foodListActivity extends AppCompatActivity implements FoodListAdapt
     @Override
     public void onFoodItemClicked(View view, OneFoodItem selectedFood) {
         int id=view.getId();
-        if(id==R.id.foodDistance){
+        if(id==R.id.foodDistance || id==R.id.clickHere){
             Intent intent=new Intent(this,OneMapActivity.class);
             Bundle bundle=new Bundle();
             bundle.putSerializable("selectedFood",selectedFood);

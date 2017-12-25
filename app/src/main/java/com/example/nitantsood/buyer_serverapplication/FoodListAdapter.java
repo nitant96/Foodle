@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -38,8 +40,9 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.OneFoo
     }
 
     @Override
-    public void onBindViewHolder(FoodListAdapter.OneFoodItemHolder holder, int position) {
+    public void onBindViewHolder(final FoodListAdapter.OneFoodItemHolder holder, int position) {
         holder.title.setText(list.get(position).getTitle());
+        holder.progressBar.setVisibility(View.VISIBLE);
         if(list.get(position).getPrice().equals("0")){
             holder.Price.setText("Free of Cost");
         }
@@ -50,7 +53,17 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.OneFoo
         holder.Distance.setText(""+list.get(position).getDistance()+" away");
         holder.itemView.setTag(list.get(position));
         if(!list.get(position).getPicture_URL().equals("none")) {
-            Picasso.with(mContext).load(list.get(position).getPicture_URL()).into(holder.image);
+            Picasso.with(mContext).load(list.get(position).getPicture_URL()).into(holder.image, new Callback() {
+                @Override
+                public void onSuccess() {
+                    holder.progressBar.setVisibility(View.INVISIBLE);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
         }
     }
 
@@ -60,8 +73,9 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.OneFoo
     }
 
     public class OneFoodItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView  title,Distance,Price,Quantity;
+        public TextView  title,Distance,Price,Quantity,clickHere;
         public ImageView image;
+        public ProgressBar progressBar;
         public OneFoodItemHolder(View itemView) {
             super(itemView);
             title=(TextView) itemView.findViewById(R.id.foodTitle);
@@ -69,8 +83,11 @@ public class FoodListAdapter extends RecyclerView.Adapter<FoodListAdapter.OneFoo
             Price=(TextView) itemView.findViewById(R.id.foodPrice);
             Quantity=(TextView) itemView.findViewById(R.id.foodQuantity);
             image=(ImageView) itemView.findViewById(R.id.foodImaage);
+            progressBar=itemView.findViewById(R.id.progressBar3);
+            clickHere=itemView.findViewById(R.id.clickHere);
             itemView.setOnClickListener(this);
             Distance.setOnClickListener(this);
+            clickHere.setOnClickListener(this);
             Distance.setTextColor(Color.BLUE);
         }
 
