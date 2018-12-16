@@ -44,6 +44,7 @@ public class FrontPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front_page);
+
         imageView=(ImageView) findViewById(R.id.poolBack);
         viewAllPool=(TextView) findViewById(R.id.viewMorePools);
         RegisterText=(TextView) findViewById(R.id.frontRegisterText);

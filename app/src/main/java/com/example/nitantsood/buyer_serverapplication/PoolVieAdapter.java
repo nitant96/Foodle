@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by NITANT SOOD on 28-10-2017.
@@ -41,7 +42,7 @@ public class PoolVieAdapter extends RecyclerView.Adapter<PoolVieAdapter.OnePoolV
         holder.title.setText(list.get(position).getName());
         holder.address.setText(list.get(position).getPlace());
         Timestamp timestamp=new Timestamp(Long.parseLong(list.get(position).getDateTime()));
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy 'at' HH:mm");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.US);
         holder.time.setText(simpleDateFormat.format(timestamp));
     }
 

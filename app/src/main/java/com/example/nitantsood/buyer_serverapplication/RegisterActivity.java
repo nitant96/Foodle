@@ -143,23 +143,23 @@ public class RegisterActivity extends AppCompatActivity {
             intent.putExtras(bundle);
             startActivity(intent);
         }
-        else if(radioGroup.getCheckedRadioButtonId()==R.id.NgoradioButton){
-            OneNgoDetail oneNgoDetail=new OneNgoDetail();
-            oneNgoDetail.setEmail(email.getText().toString());
-            oneNgoDetail.setOrganization_name(company.getText().toString());
-            oneNgoDetail.setAadhaar_UID("");
-            oneNgoDetail.setNgo_UID(mAuth.getCurrentUser().getUid());
-            oneNgoDetail.setContact_no(contact.getText().toString());
-            mRef = new Firebase("https://buyer-serverapplication.firebaseio.com/Ngo");
-            Firebase OneNgoRef = mRef.child(mAuth.getCurrentUser().getUid());
-            OneNgoRef.setValue(oneNgoDetail);
-
-            Intent intent=new Intent(RegisterActivity.this,NgoListActivity.class);
-            Bundle bundle=new Bundle();
-            bundle.putSerializable("oneNgo",oneNgoDetail);
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }
+//        else if(radioGroup.getCheckedRadioButtonId()==R.id.NgoradioButton){
+//            OneNgoDetail oneNgoDetail=new OneNgoDetail();
+//            oneNgoDetail.setEmail(email.getText().toString());
+//            oneNgoDetail.setOrganization_name(company.getText().toString());
+//            oneNgoDetail.setAadhaar_UID("");
+//            oneNgoDetail.setNgo_UID(mAuth.getCurrentUser().getUid());
+//            oneNgoDetail.setContact_no(contact.getText().toString());
+//            mRef = new Firebase("https://buyer-serverapplication.firebaseio.com/Ngo");
+//            Firebase OneNgoRef = mRef.child(mAuth.getCurrentUser().getUid());
+//            OneNgoRef.setValue(oneNgoDetail);
+//
+//            Intent intent=new Intent(RegisterActivity.this,NgoListActivity.class);
+//            Bundle bundle=new Bundle();
+//            bundle.putSerializable("oneNgo",oneNgoDetail);
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//        }
 
     }
 //    @Override

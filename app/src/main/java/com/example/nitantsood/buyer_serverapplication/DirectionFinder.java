@@ -1,6 +1,7 @@
 package com.example.nitantsood.buyer_serverapplication;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -115,6 +116,7 @@ public class DirectionFinder {
             routes.add(route);
         }
 
+        Log.d("check",routes.size()+"");
         listener.onDirectionFinderSuccess(routes,index);
     }
 

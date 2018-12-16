@@ -73,15 +73,22 @@ public class AllPoolShowActivity extends AppCompatActivity implements PoolVieAda
             Toast.makeText(this, "user", Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(this,PoolContributorActivity.class);
             intent.putExtra("call",call);
+
             Bundle bundle=new Bundle();
             bundle.putSerializable("onePool",poolList.get(position));
             bundle.putSerializable("oneUser",oneUserDetails);
+
+
+
+
+
             intent.putExtras(bundle);
             startActivity(intent);
         }else if (call==3){
             Toast.makeText(this, "seller", Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(this,PoolContributorActivity.class);
             intent.putExtra("call",call);
+
             Bundle bundle=new Bundle();
             bundle.putSerializable("onePool",poolList.get(position));
             bundle.putSerializable("oneSeller",oneSellerDetail);

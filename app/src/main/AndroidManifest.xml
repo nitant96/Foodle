@@ -3,10 +3,12 @@
     package="com.example.nitantsood.buyer_serverapplication">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
-        android:required="true"/>
+        android:required="true" />
 
     <application
         android:name=".FireApp"
@@ -20,17 +22,20 @@
             android:name=".foodDetailActivity"
             android:label="Food Detail Activity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".foodListActivity"
-            android:label="Food List"/>
+        <activity
+            android:name=".foodListActivity"
+            android:label="Food List" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".SellerFoodinputDetails"
-            android:label="Post New Food"
+            android:label="Dispose Food"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity"
-            android:label="Login"/>
-        <activity android:name=".RegisterActivity"
-            android:label="Register"/>
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="Register" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -61,9 +66,13 @@
         <activity
             android:name=".PoolLocationSetFinder"
             android:label="@string/title_activity_pool_location_set_finder" />
-        <activity android:name=".AllPoolShowActivity" />
+        <activity android:name=".AllPoolShowActivity"
+            android:label="Collection Centres" />
         <activity android:name=".SellerListActivity" />
-        <activity android:name=".PoolContributorActivity"></activity>
+        <activity android:name=".PoolContributorActivity" />
+        <activity
+            android:name=".CollectionActivity"
+            android:label="@string/title_activity_collection"></activity>
     </application>
 
 </manifest>
